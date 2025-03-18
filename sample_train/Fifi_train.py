@@ -38,6 +38,15 @@ def split(df, split='test'):
         print(f"Warning: No data found for split 'train' or '{split}'. Check your data.")
     return train_df, test_df
 
+def oversample_dataframe(df, label_col='Label'):
+
+    max_count = df[label_col].value_counts().max()
+    df_list = []
+    for label, group in df.groupby(label_col):
+        group_upsampled = group.sample(max_count, replace=True, random_state=42)
+        df_list.append(group_upsampled)
+    return pd.concat(df_list)
+
 def model_training(train_df, label_encoder, model_name, model):
     pipeline = Pipeline([
         ('tfidf', TfidfVectorizer(ngram_range=(1, 2), stop_words='english', max_features=5000)),
