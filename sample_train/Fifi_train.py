@@ -58,6 +58,7 @@ def model_training(train_df, label_encoder, model_name, model):
     # Ensure label encoder is fitted before using it
     label_encoder.fit(train_df['Label'])
     train_df['Label_enc'] = label_encoder.transform(train_df['Label'])
+    train_df = oversample_dataframe(train_df, label_col='Label_enc')
 
     # Fit the pipeline
     start_time = time.time()
