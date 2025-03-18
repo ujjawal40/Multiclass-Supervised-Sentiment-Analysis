@@ -139,7 +139,7 @@ def main():
         'Logistic Regression': LogisticRegression(multi_class='multinomial', max_iter=1000, random_state=42),
         'Random Forest': RandomForestClassifier(n_estimators=100, random_state=42),
         'Naive Bayes': MultinomialNB(alpha=0.1),
-        'XGBoost': XGBClassifier(use_label_encoder=False, eval_metric='mlogloss', random_state=42)
+        'XGBoost': XGBClassifier(use_label_encoder=True, eval_metric='mlogloss', random_state=42, n_estimators=1000),
     }
 
     # Train and evaluate models in parallel
